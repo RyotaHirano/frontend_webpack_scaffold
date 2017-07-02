@@ -1,0 +1,3 @@
+# frontend webpack scaffold
+frontend develop scaffold based on webpack.  
+use pug, postcss, ES2015(babel), eslint...
