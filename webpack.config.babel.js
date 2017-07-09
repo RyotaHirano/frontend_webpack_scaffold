@@ -68,6 +68,12 @@ module.exports = {
             'sass-loader'
           ]
         })
+      },
+      {
+        test: /\.(jpe?g|png|svg|gif|ico)$/,
+        use: [
+          'file-loader?name=assets/[path][name].[ext]'
+        ]
       }
     ]
   },
