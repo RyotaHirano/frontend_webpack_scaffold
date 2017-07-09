@@ -7,4 +7,4 @@
 ./declares
 
 [options]
-module.name_mapper.extension='scss' -> '/cssModules.js
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/declares/cssModules.js.flow'

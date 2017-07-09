@@ -28,6 +28,7 @@
     "eslint": "^4.1.1",
     "eslint-loader": "^1.8.0",
     "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-flowtype": "^2.34.1",
     "extract-text-webpack-plugin": "3.0.0-beta.3",
     "file-loader": "^0.11.2",
     "flow-bin": "^0.49.1",
