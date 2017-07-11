@@ -5,6 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 import { resolve } from 'path'
 const rootResolve = pathname => resolve(__dirname, pathname)
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
   entry: './src/js/main.js',
   output: {
