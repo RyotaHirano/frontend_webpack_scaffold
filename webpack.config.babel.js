@@ -73,9 +73,12 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|svg|gif|ico)$/,
-        use: [
-          'file-loader?name=assets/[path][name].[ext]'
-        ]
+        use:
+          isProd ?
+            [
+              'file-loader?name=assets/[path][name].[ext]'
+            ]
+          : 'url-loader'
       }
     ]
   },
