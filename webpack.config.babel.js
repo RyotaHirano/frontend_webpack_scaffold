@@ -7,6 +7,29 @@ const rootResolve = pathname => resolve(__dirname, pathname)
 
 const isProd = process.env.NODE_ENV === 'production'
 
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }
+  }),
+  new ExtractTextPlugin({
+    filename: 'assets/css/style.[hash].css',
+    disable: !isProd,
+    allChunks: true
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new HtmlWebpackPlugin({
+    template: `src/html/index.pug`,
+  })
+]
+
+if(isProd) {
+  plugins.push(
+    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false, screw_ie8: true } })
+  )
+}
+
 module.exports = {
   entry: './src/js/main.js',
   output: {
@@ -20,22 +43,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.scss', '.sass'],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: `${rootResolve('src/html/index.pug')}`,
-    }),
-    new ExtractTextPlugin({
-      filename: 'assets/css/style.[hash].css',
-      disable: process.env.NODE_ENV !== 'production',
-      allChunks: true
-    })
-  ],
+  plugins,
   module: {
     rules: [
       {
@@ -83,8 +91,9 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: rootResolve('docs'),
+    contentBase: rootResolve('public'),
     publicPath: '/',
+    inline: true,
     hot: true,
     host: '0.0.0.0'
   }

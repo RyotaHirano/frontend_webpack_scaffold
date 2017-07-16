@@ -2,7 +2,7 @@
   "name": "frontend_webpack_scaffold",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --progress --hot",
+    "start": "webpack-dev-server --progress --open",
     "type": "flow",
     "clean": "rm -rf ./public",
     "build": "npm run clean && NODE_ENV=production webpack --progress --hide-modules"
