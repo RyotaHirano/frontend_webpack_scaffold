@@ -84,9 +84,34 @@ module.exports = {
         use:
           isProd ?
             [
-              'file-loader?name=assets/[path][name].[ext]'
+              'file-loader?name=assets/[path][name].[ext]',
+              {
+                loader: 'image-webpack-loader',
+                query: {
+                  mozjpeg: {
+                    progressive: true,
+                  },
+                  gifsicle: {
+                    interlaced: false,
+                  },
+                  optipng: {
+                    optimizationLevel: 7,
+                  },
+                  pngquant: {
+                    quality: '65-90',
+                    speed: 4,
+                  },
+                }
+              }
             ]
-          : 'url-loader'
+          : [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 9000
+              }
+            }
+          ]
       }
     ]
   },
