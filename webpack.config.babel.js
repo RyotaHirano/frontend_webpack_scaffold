@@ -105,13 +105,13 @@ module.exports = {
               }
             ]
           : [
-            {
-              loader: 'url-loader',
-              options: {
-                limit: 9000
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 9000
+                }
               }
-            }
-          ]
+            ]
       }
     ]
   },
