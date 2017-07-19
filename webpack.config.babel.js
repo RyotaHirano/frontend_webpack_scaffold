@@ -30,6 +30,32 @@ if(isProd) {
   )
 }
 
+const fileLoaderRule = {
+  loader: 'file-loader',
+  options: {
+    name: 'assets/[path][name].[ext]'
+  }
+}
+
+const imageWebpackLoaderRule = {
+  loader: 'image-webpack-loader',
+  query: {
+    mozjpeg: {
+      progressive: true,
+    },
+    gifsicle: {
+      interlaced: false,
+    },
+    optipng: {
+      optimizationLevel: 7,
+    },
+    pngquant: {
+      quality: '65-90',
+      speed: 4,
+    },
+  }
+}
+
 module.exports = {
   entry: './src/js/main.js',
   output: {
@@ -84,25 +110,8 @@ module.exports = {
         use:
           isProd ?
             [
-              'file-loader?name=assets/[path][name].[ext]',
-              {
-                loader: 'image-webpack-loader',
-                query: {
-                  mozjpeg: {
-                    progressive: true,
-                  },
-                  gifsicle: {
-                    interlaced: false,
-                  },
-                  optipng: {
-                    optimizationLevel: 7,
-                  },
-                  pngquant: {
-                    quality: '65-90',
-                    speed: 4,
-                  },
-                }
-              }
+              fileLoaderRule,
+              imageWebpackLoaderRule
             ]
           : [
               {
