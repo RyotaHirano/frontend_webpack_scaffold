@@ -56,6 +56,13 @@ const imageWebpackLoaderRule = {
   }
 }
 
+const urlLoaderRule = {
+  loader: 'url-loader',
+  options: {
+    limit: 9000
+  }
+}
+
 module.exports = {
   entry: './src/js/main.js',
   output: {
@@ -114,12 +121,7 @@ module.exports = {
               imageWebpackLoaderRule
             ]
           : [
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 9000
-                }
-              }
+              urlLoaderRule
             ]
       }
     ]
