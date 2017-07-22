@@ -36,6 +36,19 @@ if(isProd) {
   )
 }
 
+const jsRules = {
+  babel: {
+    test: /\.js$/,
+    exclude: /node_modules/,
+    use: 'babel-loader'
+  },
+  eslint: {
+    test: /\.js$/,
+    exclude: /node_modules/,
+    use: 'eslint-loader',
+  }
+}
+
 const fileLoaderRule = {
   loader: 'file-loader',
   options: {
@@ -97,16 +110,8 @@ module.exports = {
           }
         ]
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'eslint-loader',
-      },
+      jsRules.babel,
+      jsRules.eslint,
       {
         test: /\.(css|scss|sass)$/,
         use: ExtractTextPlugin.extract({
