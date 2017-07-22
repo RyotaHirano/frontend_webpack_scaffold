@@ -24,9 +24,15 @@ const plugins = [
   })
 ]
 
+// production
 if(isProd) {
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false, screw_ie8: true } })
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      }
+    })
   )
 }
 
