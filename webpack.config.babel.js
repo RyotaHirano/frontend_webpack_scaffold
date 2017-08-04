@@ -5,8 +5,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 import { resolve } from 'path'
 const rootResolve = pathname => resolve(__dirname, pathname)
 
-import webpackRules from './server/webpack_rules'
-
 const isProd = process.env.NODE_ENV === 'production'
 
 const plugins = [
@@ -66,8 +64,16 @@ module.exports = {
           }
         ]
       },
-      webpackRules.jsRule.babel,
-      webpackRules.jsRule.eslint,
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.js$/,
+          exclude: /node_modules/,
+          use: 'eslint-loader',
+      },
       {
         test: /\.(css|scss|sass)$/,
         use: ExtractTextPlugin.extract({
@@ -84,11 +90,38 @@ module.exports = {
         use:
           isProd ?
             [
-              webpackRules.fileLoaderRule,
-              webpackRules.imageWebpackLoaderRule
+              {
+                loader: 'file-loader',
+                options: {
+                  name: 'assets/[path][name].[ext]'
+                }
+              },
+              {
+                loader: 'image-webpack-loader',
+                query: {
+                  mozjpeg: {
+                    progressive: true,
+                  },
+                  gifsicle: {
+                    interlaced: false,
+                  },
+                  optipng: {
+                    optimizationLevel: 7,
+                  },
+                  pngquant: {
+                    quality: '65-90',
+                    speed: 4,
+                  },
+                }
+              }
             ]
           : [
-              webpackRules.urlLoaderRule
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 9000
+                }
+              }
             ]
       }
     ]
