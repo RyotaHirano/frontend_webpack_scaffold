@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 import { resolve } from 'path'
 const rootResolve = pathname => resolve(__dirname, pathname)
 
-import { webpackRules } from './server/webpack_rules'
+import webpackRules from './server/webpack_rules'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -66,12 +66,17 @@ module.exports = {
           }
         ]
       },
-      jsRule.babel,
-      jsRule.eslint,
+      webpackRules.jsRule.babel,
+      webpackRules.jsRule.eslint,
       {
         test: /\.(css|scss|sass)$/,
         use: ExtractTextPlugin.extract({
-          styleRules,
+          fallback: "style-loader",
+          use: [
+            {loader: 'css-loader', options: {importLoaders: 2}},
+            'postcss-loader',
+            'sass-loader'
+          ]
         })
       },
       {
@@ -79,11 +84,11 @@ module.exports = {
         use:
           isProd ?
             [
-              fileLoaderRule,
-              imageWebpackLoaderRule
+              webpackRules.fileLoaderRule,
+              webpackRules.imageWebpackLoaderRule
             ]
           : [
-              urlLoaderRule
+              webpackRules.urlLoaderRule
             ]
       }
     ]
