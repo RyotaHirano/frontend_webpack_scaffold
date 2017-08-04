@@ -11,6 +11,15 @@ const jsRule = {
   }
 }
 
+const styleRule = {
+  fallback: "style-loader",
+  use: [
+    { loader: 'css-loader', options: { importLoaders: 2 } },
+    'postcss-loader',
+    'sass-loader'
+  ]
+}
+
 const fileLoaderRule = {
   loader: 'file-loader',
   options: {
@@ -46,6 +55,7 @@ const urlLoaderRule = {
 
 export default {
   jsRule,
+  styleRule,
   fileLoaderRule,
   imageWebpackLoaderRule,
   urlLoaderRule
