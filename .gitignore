@@ -210,4 +210,4 @@ jspm_packages
 *.css.map
 
 src
-public
+build
