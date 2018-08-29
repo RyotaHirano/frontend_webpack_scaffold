@@ -1,6 +1,6 @@
 const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-import { resolve } from 'path'
+const resolve = require('path').resolve
 const rootResolve = pathname => resolve(__dirname, pathname)
 
 const baseConfig = require('./webpack.base.config.babel.js')
