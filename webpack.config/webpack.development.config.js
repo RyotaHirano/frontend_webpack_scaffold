@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const resolve = require('path').resolve
 const rootResolve = pathname => resolve(__dirname, pathname)
 
-const baseConfig = require('./webpack.base.config.babel.js')
+const baseConfig = require('./webpack.base.config.js')
 
 const plugins = [
   new ExtractTextPlugin({
@@ -12,11 +12,10 @@ const plugins = [
 ]
 
 module.exports = merge(baseConfig, {
+  mode: 'development',
   plugins,
-  devServer: {
-    contentBase: rootResolve('dist'),
-    publicPath: '/',
-    inline: true,
+  serve: {
+    content: rootResolve('dist'),
     hot: true,
     host: '0.0.0.0'
   }

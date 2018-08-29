@@ -2,7 +2,7 @@ const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-const baseConfig = require('./webpack.base.config.babel.js')
+const baseConfig = require('./webpack.base.config.js')
 
 const plugins = [
   new ExtractTextPlugin({
@@ -21,5 +21,6 @@ const plugins = [
 ]
 
 module.exports = merge(baseConfig, {
+  mode: 'production',
   plugins
 })
